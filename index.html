@@ -1,194 +1,268 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-  <meta name="google-site-verification" content="zIviQE-mHFbcrlKZN8Gyxx6bkT3qXvGJn-uY8ZhSvvo" />
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="google-site-verification" content="zIviQE-mHFbcrlKZN8Gyxx6bkT3qXvGJn-uY8ZhSvvo" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@900&display=swap" rel="stylesheet">
 
-  <title>都社共の庭</title>
+	<title>都社共の庭</title>
 
-  <meta name="description"
-        content="横浜国立大学 都市科学部 都市社会共生学科（都社共）のオープンキャンパス・入試・説明会情報をまとめています。学生目線で授業やキャンパスライフも紹介します。">
+	<meta name="description" content="横浜国立大学 都市科学部 都市社会共生学科（都社共）のオープンキャンパス・入試・説明会情報をまとめています。学生目線で授業やキャンパスライフも紹介します。">
 
-  <meta name="keywords"
-        content="横浜国立大学, 横国, 都市科学部, 都市社会共生学科, 都社共, オープンキャンパス, オーキャン, 入試, 説明会, 都市文化祭, としゃきょう">
+	<meta name="keywords" content="横浜国立大学, 横国, 都市科学部, 都市社会共生学科, 都社共, オープンキャンパス, オーキャン, 入試, 説明会, 都市文化祭, としゃきょう">
 
-  <style>
-    body {
-      font-family: sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f5f5f5;
-      color: #222;
-      line-height: 1.8;
-    }
+	<style>
+		body {
+			font-family: sans-serif;
+			margin: 0;
+			padding: 0;
+			background: #f5f5f5;
+			color: #222;
+			line-height: 1.8;
+		}
 
-header {
-  position: sticky;
-  top: 0;
+		header {
+			position: relative;
+			overflow: hidden;
+			color: white;
+		}
 
-  height: 100vh;
-  min-height: 300px;
+		header::before {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background: rgba(0, 0, 0, 0.35);
+			pointer-events: none;
+		}
 
-  background:
-    linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
-    url('S__91496450.jpg');
+		header .header-image {
+			display: block;
+			width: 100%;
+			height: auto;
+		}
 
-  background-size: cover;
-  background-position: center;
+		header .header-content {
+			position: absolute;
+			top: 19%;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 100%;
+			box-sizing: border-box;
+			padding: 0 20px;
+			text-align: center;
+			z-index: 1;
+		}
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+		main {
+			max-width: 900px;
+			margin: 40px auto;
+			padding: 20px;
+			background: transparent;
+			border-radius: 0;
+			box-shadow: none;
+		}
 
-  color: white;
-  text-align: center;
+		h1,
+		h2 {
+			color: #ffffff;
+		}
 
-  transition:
-    height 0.4s ease,
-    padding 0.4s ease;
+		section {
+			margin-bottom: 50px;
+		}
 
-  z-index: 1000;
-}
+		footer {
+			text-align: center;
+			padding: 20px;
+			color: #666;
+			font-size: 0.9rem;
+		}
 
-    main {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-    }
+		.button {
+			display: inline-block;
+			background: #006633;
+			color: white;
+			padding: 12px 24px;
+			border-radius: 8px;
+			text-decoration: none;
+			margin-top: 10px;
+		}
 
-    h1, h2 {
-      color: #008000;
-    }
+		.button:hover {
+			opacity: 0.9;
+		}
 
-    section {
-      margin-bottom: 50px;
-    }
+		.tab-nav {
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
+			gap: 12px;
+			background: #ffffff;
+			padding: 12px 20px;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+			margin-bottom: 20px;
+			position: sticky;
+			top: 0;
+			z-index: 50;
+		}
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #666;
-      font-size: 0.9rem;
-    }
+		.tab-button {
+			background: transparent;
+			border: none;
+			color: #333;
+			font-size: 1rem;
+			padding: 10px 16px;
+			cursor: pointer;
+			border-bottom: 3px solid transparent;
+			transition: color 0.2s ease, border-color 0.2s ease;
+		}
 
-    .button {
-      display: inline-block;
-      background: #003366;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 8px;
-      text-decoration: none;
-      margin-top: 10px;
-    }
+		.tab-button.active {
+			color: #006633;
+			font-weight: 700;
+			background: #f0f0f0;
+			border-radius: 12px;
+			border-bottom-color: transparent;
+		}
 
-    .button:hover {
-      opacity: 0.9;
-    }
-    header h1 {
-  font-size: 4rem;
-  margin: 0;
+		.tab-panel {
+			display: none;
+		}
 
-  text-shadow:
-    0 4px 20px rgba(0,0,0,0.6);
+		.tab-panel.active {
+			display: block;
+		}
 
-  transition: font-size 0.4s ease;
-}
-    header.shrink {
-  height: 220px;
-}
+		header h1 {
+			font-size: 14vw;
+			margin: 0;
+			font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+			font-weight: 100;
+			letter-spacing: 0.2em;
 
-header.shrink h1 {
-  font-size: 2rem;
-}
-  </style>
+			text-shadow:
+				0 4px 20px rgba(0, 0, 0, 0.6);
+
+			transition: font-size 0.4s ease;
+		}
+
+		header p {
+			font-size: 3vw;
+			margin: 16px 0 0;
+			font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+			color: #ffffff;
+			text-align: center;
+		}
+
+		main h2, .tab-panel h2 {
+			display: block;
+			width: 100%;
+			box-sizing: border-box;
+			background: linear-gradient(90deg, #004d33 0%, #007a4d 50%, #00a36a 100%);
+			color: #ffffff;
+			padding: 6px 20px;
+			border-radius: 0;
+			margin: 0 0 12px 0;
+			text-align: left;
+		}
+	</style>
 </head>
+
 <body>
 
-  <header>
-    <h1>都社共の庭 - 学生有志企画</h1>
-    <p>
-      学生有志企画「都社共の庭」開催決定！
-    </p>
-  </header>
+	<header>
+		<img class="header-image" src="S__131932174.jpg" alt="都社共の庭">
+		<div class="header-content">
+			<h1>都社共の庭</h1>
+			<p>
+				2026.6.21.Sun. 10:00~
+			</p>
+		</div>
+	</header>
 
-  <main>
+	<div class="tab-nav">
+		<button class="tab-button active" data-tab="home">ホーム</button>
+		<button class="tab-button" data-tab="about">都社共の庭とは</button>
+		<button class="tab-button" data-tab="studio">スタジオについて</button>
+		<button class="tab-button" data-tab="schedule">当日企画一覧</button>
+	</div>
 
-    <section>
-      <h2>都社共の庭について</h2>
-      <p>
-        都社共の庭は、6/20(土)~6/21(日)に横浜国立大学で開催されるオープンキャンパスに合わせて、学部生・院生・卒業生が有志で行う企画です。都市社会共生学科を知ってもらい、興味を持ってもらうことを目的としています！
-      </p>
+	<main>
+		<div id="home" class="tab-panel active">
+			<section>
+				<h2>都社共の庭について</h2>
+				<p>
+					都社共の庭は、6/20(土)~6/21(日)に横浜国立大学で開催されるオープンキャンパスに合わせて、学部生・院生・卒業生が有志で行う企画です。都市社会共生学科を知ってもらい、興味を持ってもらうことを目的としています！
+				</p>
 
-      <p>
-        ※現在作成中です
-      </p>
+				<p>
+					企画は主に6/21(日)に行います。※現在作成中です
+				</p>
 
-      <a class="button" href="https://www.ynu.ac.jp/exam/ynu/opencampus.html">オープンキャンパス情報を見る</a>
-    </section>
+				<a class="button" href="https://www.ynu.ac.jp/exam/ynu/opencampus.html">オープンキャンパス情報を見る</a>
+			</section>
 
-    <section>
-      <h2>都社共とは？</h2>
+			<section>
+				<h2>都社共とは？</h2>
 
-      <p>
-        都市社会共生学科（都社共）は、都市問題や地域社会について学ぶ学科です。
-      </p>
+				<p>
+					都市社会共生学科（都社共）は、都市問題や地域社会について学ぶ学科です。
+				</p>
 
-      <p>
-        都市計画、社会学、まちづくり、交通、コミュニティ、防災など幅広いテーマを扱います。
-      </p>
+				<p>
+					都市計画、社会学、まちづくり、交通、コミュニティ、防災など幅広いテーマを扱います。
+				</p>
 
-      <p>
-        横浜国立大学 都市科学部の中でも、文系・理系を横断する学びが特徴です。
-      </p>
-    </section>
+				<p>
+					横浜国立大学 都市科学部の中でも、文系・理系を横断する学びが特徴です。
+				</p>
+			</section>
+		</div>
 
-    <section>
-      <h2>入試・説明会情報</h2>
+		<div id="about" class="tab-panel">
+			<section>
+				<h2>都社共の庭とは</h2>
+				<p>Coming Soon...</p>
+			</section>
+		</div>
 
-      <p>
-        説明会について順次掲載予定です。
-      </p>
+		<div id="studio" class="tab-panel">
+			<section>
+				<h2>スタジオについて</h2>
+				<p>Coming Soon...</p>
+			</section>
+		</div>
 
-      <ul>
-        <li>-</li>
-        <li>-</li>
-        <li>-</li>
-        <li>-</li>
-      </ul>
-    </section>
+		<div id="schedule" class="tab-panel">
+			<section>
+				<h2>当日企画一覧</h2>
+				<p>Coming Soon...</p>
+			</section>
+		</div>
 
-    <section>
-      <h2>受験生へ</h2>
+	</main>
 
-      <p>
-        「横国の都社共ってどんな雰囲気？」
-        「都市科学部って何を勉強するの？」
-        という人向けに、授業やキャンパスライフも発信していく予定です。
-      </p>
-    </section>
+	<footer>
+		© 2026 都社共の庭 実行委員会
+	</footer>
 
-  </main>
+	<script>
+		const tabButtons = document.querySelectorAll('.tab-button');
+		const tabPanels = document.querySelectorAll('.tab-panel');
 
-  <footer>
-    © 2026 横浜国立大学 都市社会共生学科 情報サイト
-  </footer>
-<script>
-window.addEventListener('scroll', function () {
-
-  const header = document.querySelector('header');
-
-  if (window.scrollY > 100) {
-    header.classList.add('shrink');
-  } else {
-    header.classList.remove('shrink');
-  }
-
-});
-</script>
+		tabButtons.forEach((button) => {
+			button.addEventListener('click', () => {
+				tabButtons.forEach((btn) => btn.classList.remove('active'));
+				tabPanels.forEach((panel) => panel.classList.remove('active'));
+				button.classList.add('active');
+				document.getElementById(button.dataset.tab).classList.add('active');
+			});
+		});
+	</script>
 </body>
+
 </html>
