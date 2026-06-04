@@ -3,9 +3,9 @@
 
 <head>
 	<meta property="og:title" content="都社共の庭">
-<meta property="og:url" content="https://tosyakyo.github.io/opencampus/">
-<meta property="og:type" content="website">
-<meta property="og:description" content="横浜国立大学都市社会共生学科の学生有志による企画">
+	<meta property="og:url" content="https://tosyakyo.github.io/opencampus/">
+	<meta property="og:type" content="website">
+	<meta property="og:description" content="横浜国立大学都市社会共生学科の学生有志による企画">
 	<meta name="google-site-verification" content="zIviQE-mHFbcrlKZN8Gyxx6bkT3qXvGJn-uY8ZhSvvo" />
 	<link rel="canonical" href="https://tosyakyo.github.io/opencampus/">
 	<meta charset="UTF-8">
@@ -314,6 +314,43 @@
 			cursor: pointer;
 		}
 
+		/* Image Modal styles */
+		#image-modal {
+			background: transparent;
+			max-width: 90vw;
+			max-height: 90vh;
+			width: auto;
+			height: auto;
+			padding: 0;
+			border-radius: 0;
+			box-shadow: none;
+		}
+
+		#image-modal img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			max-width: 90vw;
+			max-height: 90vh;
+			object-fit: contain;
+		}
+
+		#image-modal .close-btn {
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			font-size: 2rem;
+			color: #fff;
+			z-index: 10000;
+			background: rgba(0, 0, 0, 0.5);
+			padding: 8px 12px;
+			border-radius: 4px;
+		}
+
+		#image-modal .close-btn:hover {
+			background: rgba(0, 0, 0, 0.7);
+		}
+
 		header h1 {
 			font-size: 14vw;
 			margin: 0;
@@ -381,6 +418,7 @@
 		<button class="tab-button" data-tab="about">都社共の庭とは</button>
 		<button class="tab-button" data-tab="studio">スタジオについて</button>
 		<button class="tab-button" data-tab="schedule">当日企画一覧</button>
+		<button class="tab-button" data-tab="gallery">写真集</button>
 	</div>
 
 	<main>
@@ -423,9 +461,11 @@
 			<section id="instagram-section">
 				<h2>SNS</h2>
 				<ul class="social-list">
-					<li><a href="https://www.instagram.com/ynu.usc_2026/" target="_blank" rel="noopener"><img src="icons8-i-100.png" alt="Instagram">@ynu.usc_2026</a></li>
-					<li><a href="https://x.com/toshakyononiwa/" target="_blank" rel="noopener"><img src="icons8-x-100.png" alt="X">@toshakyononiwa</a></li>
-			</ul>
+					<li><a href="https://www.instagram.com/ynu.usc_2026/" target="_blank" rel="noopener"><img
+								src="icons8-i-100.png" alt="Instagram">@ynu.usc_2026</a></li>
+					<li><a href="https://x.com/toshakyononiwa/" target="_blank" rel="noopener"><img
+								src="icons8-x-100.png" alt="X">@toshakyononiwa</a></li>
+				</ul>
 			</section>
 			<section>
 				<h2>実行委員一覧</h2>
@@ -602,6 +642,53 @@
 			</p>
 		</div>
 
+		<div id="gallery" class="tab-panel">
+			<section>
+				<h2>写真集</h2>
+				<div class="studio-gallery photo-gallery">
+					<figure>
+						<img src="LINE_ALBUM_HP用写真_260604_1.jpg" alt="写真1">
+					</figure>
+					<figure>
+						<img src="LINE_ALBUM_HP用写真_260604_2.jpg" alt="写真2">
+					</figure>
+					<figure>
+						<img src="LINE_ALBUM_HP用写真_260604_3.jpg" alt="写真3">
+					</figure>
+					<figure>
+						<img src="LINE_ALBUM_HP用写真_260604_4.jpg" alt="写真4">
+					</figure>
+					<figure>
+						<img src="LINE_ALBUM_HP用写真_260604_5.jpg" alt="写真5">
+					</figure>
+					<figure>
+						<img src="LINE_ALBUM_HP用写真_260604_6.jpg" alt="写真6">
+					</figure>
+					<figure>
+						<img src="LINE_ALBUM_HP用写真_260604_7.jpg" alt="写真7">
+					</figure>
+					<figure>
+						<img src="LINE_ALBUM_HP用写真_260604_8.jpg" alt="写真8">
+					</figure>
+					<figure>
+						<img src="LINE_ALBUM_HP用写真_260604_9.jpg" alt="写真9">
+					</figure>
+					<figure>
+						<img src="LINE_ALBUM_HP用写真_260604_10.jpg" alt="写真10">
+					</figure>
+					<figure>
+						<img src="LINE_ALBUM_HP用写真_260604_11.jpg" alt="写真11">
+					</figure>
+					<figure>
+						<img src="LINE_ALBUM_HP用写真_260604_12.jpg" alt="写真12">
+					</figure>
+					<figure>
+						<img src="LINE_ALBUM_HP用写真_260604_13.jpg" alt="写真13">
+					</figure>
+				</div>
+			</section>
+		</div>
+
 	</main>
 
 	<!-- Modal for studio details -->
@@ -610,6 +697,14 @@
 			<button class="close-btn" aria-label="閉じる">×</button>
 			<h4 id="modal-title"></h4>
 			<div class="modal-body"></div>
+		</div>
+	</div>
+
+	<!-- Modal for image display -->
+	<div id="image-modal-overlay" class="modal-overlay" aria-hidden="true">
+		<div id="image-modal" role="dialog" aria-modal="true">
+			<button class="close-btn" aria-label="閉じる">×</button>
+			<img src="" alt="写真" />
 		</div>
 	</div>
 
@@ -636,6 +731,12 @@
 		const modalBody = modalOverlay.querySelector('.modal-body');
 		const closeBtn = modalOverlay.querySelector('.close-btn');
 
+		// Image modal logic for photo gallery
+		const imageModalOverlay = document.getElementById('image-modal-overlay');
+		const imageModal = document.getElementById('image-modal');
+		const imageModalImg = imageModal.querySelector('img');
+		const imageModalCloseBtn = imageModal.querySelector('.close-btn');
+
 		function openModal(title, bodyHtml) {
 			modalTitle.textContent = title;
 			modalBody.innerHTML = bodyHtml;
@@ -650,27 +751,63 @@
 			modalBody.innerHTML = '';
 		}
 
+		function openImageModal(imageSrc) {
+			imageModalImg.src = imageSrc;
+			imageModalOverlay.classList.add('active');
+			imageModalOverlay.setAttribute('aria-hidden', 'false');
+		}
+
+		function closeImageModal() {
+			imageModalOverlay.classList.remove('active');
+			imageModalOverlay.setAttribute('aria-hidden', 'true');
+			imageModalImg.src = '';
+		}
+
 		// Attach click handlers to each figure in galleries
-		document.querySelectorAll('.studio-gallery figure').forEach((fig) => {
+		document.querySelectorAll('.studio-gallery:not(.photo-gallery) figure').forEach((fig) => {
 			fig.style.cursor = 'pointer';
 			fig.addEventListener('click', (e) => {
-				const titleEl = fig.querySelector('figcaption');
-				const title = titleEl ? titleEl.textContent.trim() : '詳細';
-				const desc = fig.getAttribute('data-description') || '説明は準備中です。';
-				openModal(title, desc);
+				const desc = fig.getAttribute('data-description');
+				if (desc) {
+					const titleEl = fig.querySelector('figcaption');
+					const title = titleEl ? titleEl.textContent.trim() : '詳細';
+					openModal(title, desc);
+				}
 			});
 		});
 
-		// Close handlers
+		// Attach click handlers for photo gallery
+		document.querySelectorAll('.photo-gallery figure').forEach((fig) => {
+			fig.style.cursor = 'pointer';
+			fig.addEventListener('click', (e) => {
+				const img = fig.querySelector('img');
+				if (img) {
+					openImageModal(img.src);
+				}
+			});
+		});
+
+		// Close handlers for studio modal
 		closeBtn.addEventListener('click', closeModal);
 		modalOverlay.addEventListener('click', (e) => {
 			if (e.target === modalOverlay) closeModal();
 		});
 
+		// Close handlers for image modal
+		imageModalCloseBtn.addEventListener('click', closeImageModal);
+		imageModalOverlay.addEventListener('click', (e) => {
+			if (e.target === imageModalOverlay) closeImageModal();
+		});
+
 		// Close on ESC
 		document.addEventListener('keydown', (e) => {
-			if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
-				closeModal();
+			if (e.key === 'Escape') {
+				if (modalOverlay.classList.contains('active')) {
+					closeModal();
+				}
+				if (imageModalOverlay.classList.contains('active')) {
+					closeImageModal();
+				}
 			}
 		});
 	</script>
