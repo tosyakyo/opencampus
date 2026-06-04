@@ -121,7 +121,7 @@
 		.tab-nav {
 			display: flex;
 			justify-content: center;
-			flex-wrap: wrap;
+			flex-wrap: nowrap;
 			gap: 12px;
 			background: #ffffff;
 			padding: 12px 20px;
@@ -130,6 +130,7 @@
 			position: sticky;
 			top: 0;
 			z-index: 50;
+			overflow-x: auto;
 		}
 
 		.tab-button {
@@ -141,6 +142,22 @@
 			cursor: pointer;
 			border-bottom: 3px solid transparent;
 			transition: color 0.2s ease, border-color 0.2s ease;
+			white-space: nowrap;
+			flex-shrink: 0;
+		}
+
+		@media (max-width: 768px) {
+			.tab-button {
+				font-size: 0.85rem;
+				padding: 8px 12px;
+			}
+		}
+
+		@media (max-width: 480px) {
+			.tab-button {
+				font-size: 0.75rem;
+				padding: 6px 8px;
+			}
 		}
 
 		.tab-button.active {
@@ -647,43 +664,43 @@
 				<h2>写真集</h2>
 				<div class="studio-gallery photo-gallery">
 					<figure>
-						<img src="LINE_ALBUM_HP用写真_260604_1.jpg" alt="写真1">
+						<img src="img/LINE_ALBUM_HP用写真_260604_1.jpg" alt="写真1">
 					</figure>
 					<figure>
-						<img src="LINE_ALBUM_HP用写真_260604_2.jpg" alt="写真2">
+						<img src="img/LINE_ALBUM_HP用写真_260604_2.jpg" alt="写真2">
 					</figure>
 					<figure>
-						<img src="LINE_ALBUM_HP用写真_260604_3.jpg" alt="写真3">
+						<img src="img/LINE_ALBUM_HP用写真_260604_3.jpg" alt="写真3">
 					</figure>
 					<figure>
-						<img src="LINE_ALBUM_HP用写真_260604_4.jpg" alt="写真4">
+						<img src="img/LINE_ALBUM_HP用写真_260604_4.jpg" alt="写真4">
 					</figure>
 					<figure>
-						<img src="LINE_ALBUM_HP用写真_260604_5.jpg" alt="写真5">
+						<img src="img/LINE_ALBUM_HP用写真_260604_5.jpg" alt="写真5">
 					</figure>
 					<figure>
-						<img src="LINE_ALBUM_HP用写真_260604_6.jpg" alt="写真6">
+						<img src="img/LINE_ALBUM_HP用写真_260604_6.jpg" alt="写真6">
 					</figure>
 					<figure>
-						<img src="LINE_ALBUM_HP用写真_260604_7.jpg" alt="写真7">
+						<img src="img/LINE_ALBUM_HP用写真_260604_7.jpg" alt="写真7">
 					</figure>
 					<figure>
-						<img src="LINE_ALBUM_HP用写真_260604_8.jpg" alt="写真8">
+						<img src="img/LINE_ALBUM_HP用写真_260604_8.jpg" alt="写真8">
 					</figure>
 					<figure>
-						<img src="LINE_ALBUM_HP用写真_260604_9.jpg" alt="写真9">
+						<img src="img/LINE_ALBUM_HP用写真_260604_9.jpg" alt="写真9">
 					</figure>
 					<figure>
-						<img src="LINE_ALBUM_HP用写真_260604_10.jpg" alt="写真10">
+						<img src="img/LINE_ALBUM_HP用写真_260604_10.jpg" alt="写真10">
 					</figure>
 					<figure>
-						<img src="LINE_ALBUM_HP用写真_260604_11.jpg" alt="写真11">
+						<img src="img/LINE_ALBUM_HP用写真_260604_11.jpg" alt="写真11">
 					</figure>
 					<figure>
-						<img src="LINE_ALBUM_HP用写真_260604_12.jpg" alt="写真12">
+						<img src="img/LINE_ALBUM_HP用写真_260604_12.jpg" alt="写真12">
 					</figure>
 					<figure>
-						<img src="LINE_ALBUM_HP用写真_260604_13.jpg" alt="写真13">
+						<img src="img/LINE_ALBUM_HP用写真_260604_13.jpg" alt="写真13">
 					</figure>
 				</div>
 			</section>
