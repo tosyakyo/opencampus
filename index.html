@@ -120,17 +120,23 @@
 
 		.tab-nav {
 			display: flex;
-			justify-content: center;
+			justify-content: flex-start;
 			flex-wrap: nowrap;
 			gap: 12px;
 			background: #ffffff;
-			padding: 12px 20px;
+			padding: 12px 16px;
 			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 			margin-bottom: 20px;
 			position: sticky;
 			top: 0;
 			z-index: 50;
 			overflow-x: auto;
+			scroll-snap-type: x proximity;
+			-webkit-overflow-scrolling: touch;
+		}
+
+		.tab-button {
+			scroll-snap-align: start;
 		}
 
 		.tab-button {
@@ -350,6 +356,33 @@
 			max-width: 90vw;
 			max-height: 90vh;
 			object-fit: contain;
+		}
+
+		/* Image navigation buttons */
+		.image-nav-btn {
+			position: fixed;
+			top: 50%;
+			transform: translateY(-50%);
+			background: rgba(0,0,0,0.5);
+			color: #fff;
+			border: none;
+			font-size: 2rem;
+			width: 48px;
+			height: 72px;
+			border-radius: 6px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			z-index: 10001;
+		}
+
+		.image-nav-btn.left {
+			left: 12px;
+		}
+
+		.image-nav-btn.right {
+			right: 12px;
 		}
 
 		#image-modal .close-btn {
@@ -721,6 +754,8 @@
 	<div id="image-modal-overlay" class="modal-overlay" aria-hidden="true">
 		<div id="image-modal" role="dialog" aria-modal="true">
 			<button class="close-btn" aria-label="閉じる">×</button>
+			<button class="image-nav-btn left" aria-label="前の写真">‹</button>
+			<button class="image-nav-btn right" aria-label="次の写真">›</button>
 			<img src="" alt="写真" />
 		</div>
 	</div>
@@ -768,8 +803,16 @@
 			modalBody.innerHTML = '';
 		}
 
-		function openImageModal(imageSrc) {
-			imageModalImg.src = imageSrc;
+		function openImageModal(imageSrcOrIndex) {
+			// imageSrcOrIndex can be an index (number) or a src string
+			if (typeof imageSrcOrIndex === 'number') {
+				currentImageIndex = imageSrcOrIndex;
+				imageModalImg.src = photoSrcs[currentImageIndex];
+			} else {
+				currentImageIndex = photoSrcs.indexOf(imageSrcOrIndex);
+				if (currentImageIndex === -1) currentImageIndex = 0;
+				imageModalImg.src = imageSrcOrIndex;
+			}
 			imageModalOverlay.classList.add('active');
 			imageModalOverlay.setAttribute('aria-hidden', 'false');
 		}
@@ -778,6 +821,7 @@
 			imageModalOverlay.classList.remove('active');
 			imageModalOverlay.setAttribute('aria-hidden', 'true');
 			imageModalImg.src = '';
+			currentImageIndex = -1;
 		}
 
 		// Attach click handlers to each figure in galleries
@@ -793,15 +837,39 @@
 			});
 		});
 
-		// Attach click handlers for photo gallery
-		document.querySelectorAll('.photo-gallery figure').forEach((fig) => {
+
+		// Build photo list and attach click handlers for photo gallery
+		const photoFigures = document.querySelectorAll('.photo-gallery figure');
+		const photoImages = Array.from(photoFigures).map(f => f.querySelector('img'));
+		const photoSrcs = photoImages.map(img => img ? img.src : '');
+		let currentImageIndex = -1;
+
+		photoFigures.forEach((fig, idx) => {
 			fig.style.cursor = 'pointer';
 			fig.addEventListener('click', (e) => {
-				const img = fig.querySelector('img');
-				if (img) {
-					openImageModal(img.src);
-				}
+				openImageModal(idx);
 			});
+		});
+
+		function changeImage(delta) {
+			if (currentImageIndex === -1) return;
+			currentImageIndex = (currentImageIndex + delta + photoSrcs.length) % photoSrcs.length;
+			imageModalImg.src = photoSrcs[currentImageIndex];
+		}
+
+		// Prev/Next button handlers
+		const imagePrevBtn = imageModal.querySelector('.image-nav-btn.left');
+		const imageNextBtn = imageModal.querySelector('.image-nav-btn.right');
+
+		if (imagePrevBtn) imagePrevBtn.addEventListener('click', (e) => { e.stopPropagation(); changeImage(-1); });
+		if (imageNextBtn) imageNextBtn.addEventListener('click', (e) => { e.stopPropagation(); changeImage(1); });
+
+		// Keyboard navigation for image modal
+		document.addEventListener('keydown', (e) => {
+			if (imageModalOverlay.classList.contains('active')) {
+				if (e.key === 'ArrowLeft') changeImage(-1);
+				if (e.key === 'ArrowRight') changeImage(1);
+			}
 		});
 
 		// Close handlers for studio modal
